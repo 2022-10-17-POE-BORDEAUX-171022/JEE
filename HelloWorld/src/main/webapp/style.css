@@ -1,6 +1,6 @@
 @charset "ISO-8859-1";
 
-h1, h2, form {
+h1, h2, form, p {
 	text-align: center;
 }
 
@@ -13,4 +13,9 @@ label {
 	display: inline-block;
 	width: 120px;
 	text-align: left;	
+}
+
+
+p {
+	color: red;
 }
