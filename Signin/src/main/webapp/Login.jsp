@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<h1>Login to Hello app</h1>
-		
+		<h2>${date}</h2>
 		
 		<form method="post" action="login">
             <label for='txtLogin'>Login :</label>
