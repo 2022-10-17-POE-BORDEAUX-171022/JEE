@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import='java.util.Date' %>    
 <!DOCTYPE html>
 	<html>
 	<head>
@@ -9,9 +10,7 @@
 	</head>
 	<body>
 		<h1>Signin to hello app</h1>
-	
-	
-	
+		<h2><%= new Date() %></h2>
 		<p>${error}</p>
 	
 		<form method='post' action='/Signin/signin'>
