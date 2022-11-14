@@ -41,8 +41,7 @@ public class addView extends HttpServlet {
 			ps.executeUpdate();
 			
 			con.close();
-			
-			request.getRequestDispatcher("/showProduct.jsp").forward(request, response);
+			request.getRequestDispatcher("getall").forward(request, response);
 			
 		} catch (Exception e) {			
 			request.setAttribute("msg", "Erreur dans le produit");
