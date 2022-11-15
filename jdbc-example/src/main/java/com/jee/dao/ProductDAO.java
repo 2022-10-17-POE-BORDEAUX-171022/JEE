@@ -43,7 +43,7 @@ public class ProductDAO {
 	}
 	
 	
-	public static boolean deleteUser(int id) {
+	public static boolean deleteProduct(int id) {
 		try {
 			Connection con = UtilConnexion.seConnecter();			
 			PreparedStatement ps = con.prepareStatement("DELETE FROM product WHERE id=?");
