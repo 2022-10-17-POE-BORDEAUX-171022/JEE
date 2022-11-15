@@ -29,6 +29,11 @@ public class ProductDAO {
 				
 				res.add( new Product(id, title, descr, price));
 			}
+			
+			con.close();
+			rs.close();
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -41,7 +46,7 @@ public class ProductDAO {
 	public static boolean deleteUser(int id) {
 		try {
 			Connection con = UtilConnexion.seConnecter();			
-			PreparedStatement ps = con.prepareStatement("DELETE FROM product WHERE id= ?");
+			PreparedStatement ps = con.prepareStatement("DELETE FROM product WHERE id=?");
 			ps.setInt(1, id);
 			
 			ps.executeUpdate();
