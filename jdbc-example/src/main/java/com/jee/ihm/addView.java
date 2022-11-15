@@ -31,13 +31,12 @@ public class addView extends HttpServlet {
 			
 			
 			Connection con = UtilConnexion.seConnecter();
+									
+			PreparedStatement ps = con.prepareStatement("INSERT INTO product(title, descr, price) VALUE (?,?,?)");
+			ps.setString(1, name);
+			ps.setString(2, desc);
+			ps.setFloat(3, price);
 			
-			String query = "INSERT INTO product(title, descr, price) VALUE ('" + name + "','" + desc + "','" + price +"')";
-			
-			
-			System.out.println(query);
-			
-			PreparedStatement ps = con.prepareStatement(query);
 			ps.executeUpdate();
 			
 			con.close();

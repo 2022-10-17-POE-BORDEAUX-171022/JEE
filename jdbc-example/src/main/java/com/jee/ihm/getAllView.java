@@ -1,6 +1,7 @@
 package com.jee.ihm;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.jee.modele.Product;
+import com.jee.dao.ProductDAO;
 
 
 @WebServlet("/getall")
@@ -21,9 +25,7 @@ public class getAllView extends HttpServlet {
 	
 	
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("in doGet");
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		request.getRequestDispatcher("showProduct.jsp").forward(request, response);
 	}
 

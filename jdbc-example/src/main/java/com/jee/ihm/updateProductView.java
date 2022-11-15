@@ -23,8 +23,11 @@ public class updateProductView extends HttpServlet {
 
 			Connection con = UtilConnexion.seConnecter();
 			
-			String query = "SELECT * FROM product WHERE id= '" + id + "'";
-			PreparedStatement ps = con.prepareStatement(query);
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM product WHERE id= ?");
+			ps.setInt(1, id);
+			
+			
+			
 			ResultSet rs = ps.executeQuery();
 			
 			if ( rs.next()) {
@@ -41,10 +44,7 @@ public class updateProductView extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.getRequestDispatcher("/getall").forward(request, response);
-		}
-		
-		
-		
+		}		
 	}
 
 
@@ -60,11 +60,12 @@ public class updateProductView extends HttpServlet {
 			String description = request.getParameter("txtDescription");
 			float price = Float.valueOf( request.getParameter("txtPrice") );
 			
-			String query = "UPDATE product SET title='"+ title +"', descr='" + description + "', price='" + price + "' WHERE id = '" + id + "'" ;
+			PreparedStatement ps = con.prepareStatement("UPDATE product SET title=?, descr=?, price=? WHERE id = ?");
+			ps.setString(1, title);
+			ps.setString(2, description);
+			ps.setFloat(3, price);
+			ps.setInt(4, id);
 			
-			System.out.println(query);
-			
-			PreparedStatement ps = con.prepareStatement(query);
 			ps.executeUpdate();
 			
 			con.close();
