@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.jee.dao.UserDAO;
 import com.jee.dao.UtilConnexion;
 
 
@@ -44,62 +45,28 @@ public class CreateUsersView extends HttpServlet {
 		String password =request.getParameter("txtPassword");
 		String confirmation = request.getParameter("txtPasswordConfirmation");
 		
-		if ( email == null) email ="";
-		if ( login == null) login = "";
-		if ( password == null) password = "";
-		if ( confirmation == null) confirmation = "";
-		
-		
-		String error = "";
-		
-		if (!email.contains("@")){
-			error += "L'email ne contient pas de @ <br>";
-		} 
-		if (login == null || login.equals("")) {
-			error += "Le login est vide <br>";
-		} 
-		if ( password.length() < 8 ) {
-			error += "password trop faible <br>";
-		} 
-		if ( !confirmation.equals(password) || "".equals(confirmation) ) {
-			error += "Les passwords ne sont pas identiques <br>";
-		}
-		
-		HttpSession session = request.getSession( true ); 
-
-		
-		if ("".equals(error)) {
+		if (UserDAO.isValidUser(email, login, password, confirmation)) {			
 			
-			try {
-				Connection con = UtilConnexion.seConnecter();
-				PreparedStatement ps = con.prepareStatement("INSERT INTO user(email, login, password) VALUE ('"+email+"','"+login+"','" + password + "');" );
-				ps.executeUpdate();
-				
-				con.close();
-				request.getRequestDispatcher("/get").forward(request, response);			
+			System.out.println("isValidUser");
+			
+			if (UserDAO.createUser(email, login, password)) {
+				System.out.println("createUser");
 
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-				
-				session.setAttribute("error", "Erreur de connection");
+				request.getRequestDispatcher("/get").forward(request, response);			
+			} else {
+				request.setAttribute("error", "Erreur de connection");
 				doGet(request, response);
 			}
 			
-			
-			
-			
 		} else {
+			System.out.println("! isValidUser");
 			
-			System.out.println("error :" + error);
-			
-			session.setAttribute("error", error);
-			session.setAttribute("email", email);
-			session.setAttribute("login", login);
-			session.setAttribute("password", password);
-			session.setAttribute("confirmation", confirmation);
+			request.setAttribute("error", "Champs incorrect");
+			request.setAttribute("email", email);
+			request.setAttribute("login", login);
+			request.setAttribute("password", password);
+			request.setAttribute("confirmation", confirmation);
 			doGet(request, response);
-			
 		}
 	}
 

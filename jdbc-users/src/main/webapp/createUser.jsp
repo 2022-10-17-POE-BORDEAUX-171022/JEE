@@ -9,7 +9,7 @@
 	<body>
 		<h1>Create User</h1>
 	
-		<% if (session.getAttribute("error") != null) {	%>
+		<% if (request.getAttribute("error") != null) {	%>
 			<h3>${error}</h3>
 		<% } %>
 	

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-<%@ page import="java.sql.Connection" %>    
+<%@ page import="com.jee.modele.User" %>    
+<%@ page import="com.jee.dao.UserDAO" %>    
 <%@ page import="java.sql.ResultSet" %>    
 <%@ page import="com.jee.dao.UtilConnexion" %>    
 
@@ -13,27 +14,27 @@
 	</head>
 	<body>
 		<h1>Show Users</h1>
-		<%
-		Connection con = UtilConnexion.seConnecter();
-		ResultSet rs = con.createStatement().executeQuery("SELECT * FROM user");
-		%>
+
+		
+		<% if (request.getAttribute("msg") != null) { %>
+			<h5>${msg}</h5>
+		<% } %>
+		
 		
 		<table>
 			<tr> <th>ID user</th> <th>email</th> <th>login</th> <th>password</th> <th>Update</th> <th>Delete</th>   </tr>
 			
-			<% while(rs.next()){ %>
+			<% for(User u : UserDAO.getAllUser()){ %>
 				<tr>
-					<td> <%= rs.getInt(1) %>  </td>
-					<td> <%= rs.getString(2) %> </td>
-					<td> <%= rs.getString(3) %> </td>
-					<td> <%= rs.getString(4) %> </td>		
-					<td> <a href='/jdbc-users/update?id=<%= rs.getInt(1) %>'>Update</a></td>			
-					<td> <a href='/jdbc-users/delete?id=<%= rs.getInt(1) %>'>Delete</a></td>			
+					<td> <%= u.getId() %>  </td>
+					<td> <%= u.getEmail() %> </td>
+					<td> <%= u.getLogin() %> </td>
+					<td> <%= u.getPassword() %> </td>		
+					<td> <a href='/jdbc-users/update?id=<%= u.getId() %>'>Update</a></td>			
+					<td> <a href='/jdbc-users/delete?id=<%= u.getId() %>'>Delete</a></td>			
 				</tr>
 			<% 
 			} 
-			con.close();
-			rs.close();
 			
 			%>		
 		</table>
