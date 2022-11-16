@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ 
+<%@ taglib uri="http://myapp.fr/tld/extratags" prefix="mytags" %>
+    
 <!DOCTYPE html>
 	<html>
 	<head>
@@ -8,6 +11,9 @@
 	</head>
 	<body>
 		<h1>Create User</h1>
+	
+	
+	
 	
 		<% if (request.getAttribute("error") != null) {	%>
 			<h3>${error}</h3>
@@ -30,5 +36,10 @@
 			<input name='btnSubmit' type='submit'/>
 		
 		</form>	
+		
+		
+		<mytags:Footer userName='${login}' />
+		
+		
 	</body>
 </html>
