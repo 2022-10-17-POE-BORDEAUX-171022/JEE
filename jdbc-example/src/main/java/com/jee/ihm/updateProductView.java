@@ -11,40 +11,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jee.dao.ProductDAO;
 import com.jee.dao.UtilConnexion;
+import com.jee.modele.Product;
 
 
 @WebServlet("/update")
 public class updateProductView extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			int id = Integer.parseInt( request.getParameter("id") );
+			
+		int id = Integer.parseInt( request.getParameter("id") );
 
-			Connection con = UtilConnexion.seConnecter();
-			
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM product WHERE id= ?");
-			ps.setInt(1, id);
-			
-			
-			
-			ResultSet rs = ps.executeQuery();
-			
-			if ( rs.next()) {
-				request.setAttribute("id", rs.getInt(1));
-				request.setAttribute("title", rs.getString(2));
-				request.setAttribute("descr", rs.getString(3));
-				request.setAttribute("price", rs.getFloat(4));
-			}
-			
+		Product product = ProductDAO.getProductById(id);
+		
+		if (product != null) {
+			System.out.println("product added to attribute");
+
+			request.setAttribute("product", product);
 			request.getRequestDispatcher("updateProduct.jsp").forward(request, response);
-			
-			rs.close();
-			con.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} else {
 			request.getRequestDispatcher("/getall").forward(request, response);
-		}		
+		}
 	}
 
 

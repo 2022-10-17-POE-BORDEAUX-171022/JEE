@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://myapp.fr/tld/extratags" prefix="mytags" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,7 +10,12 @@
 	</head>
 	<body>
 		
+		<mytags:Header pageName='Add' />
+		
 		<h1>Ajouter un produit :</h1>
+		
+		
+		
 		
 		<% if ( request.getAttribute("msg") != null) {%>
 			<h4>${msg}</h4>

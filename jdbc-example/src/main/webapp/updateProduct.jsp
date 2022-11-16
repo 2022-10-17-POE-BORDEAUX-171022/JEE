@@ -14,16 +14,16 @@
 	
 		<form method="post">
 			<label for="txtId">Id :</label>
-			<input type="text" name="txtId" value="${id}" >
+			<input type="text" name="txtId" value="${product.id}" >
 			<br/>
 			<label for="txtTitle">Title :</label>
-			<input type="text" name="txtTitle" value="${title}">
+			<input type="text" name="txtTitle" value="${product.title}">
 			<br/>
 			<label for="txtDescription">Description :</label>
-			<input type="text" name="txtDescription" value="${descr}">
+			<input type="text" name="txtDescription" value="${product.descr}">
 			<br/>
 			<label for="txtPrice">Price :</label>
-			<input type="text" name="txtPrice" value="${price}">
+			<input type="text" name="txtPrice" value="${product.price}">
 			<br/>
 			<input type="submit">					
 		</form>

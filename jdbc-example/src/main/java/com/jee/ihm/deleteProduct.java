@@ -22,7 +22,7 @@ public class deleteProduct extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int id = Integer.parseInt( request.getParameter("id") );
-		boolean isOk = ProductDAO.deleteUser(id);
+		boolean isOk = ProductDAO.deleteProduct(id);
 		
 		
 		// request.setAttribute("msg", isOk ? "produit supprimé" : "erreur dans la suppression");

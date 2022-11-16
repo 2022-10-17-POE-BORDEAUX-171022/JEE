@@ -62,4 +62,41 @@ public class ProductDAO {
 	}
 	
 	
+	public static Product getProductById(int id) {
+		
+		Product product = null;
+		
+		System.out.println("in getProduct");
+		
+		try {
+			Connection con = UtilConnexion.seConnecter();
+			
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM product WHERE id = ?");
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				System.out.println("product found");
+
+				
+				product = new Product(
+				rs.getInt("id"),
+				rs.getString("title"),
+				rs.getString("descr"),
+				rs.getFloat("price")
+				);
+				
+			}
+			
+			rs.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return product;
+	}
+	
+	
+	
 }
